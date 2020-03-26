@@ -16,6 +16,13 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     glViewport(0,0,width,height);
 }
 
+// to keep input code organized
+void processInput(GLFWwindow* window) {
+    if(glfwGetKey(window,GLFW_KEY_ESCAPE)==GLFW_PRESS) {
+        glfwSetWindowShouldClose(window, true);
+    }
+}
+
 int main () {
     
     glfwInit();
@@ -42,6 +49,18 @@ int main () {
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     
     while(!glfwWindowShouldClose(window)) {
+        
+        glClearColor(0.2f,0.3f,0.3f,1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        //state setting and state using fns
+        
+        // check for specific key presses and react every frame/iteration
+        processInput(window);
+        
+        // rendering commands here
+        //...
+        
+        // check and call events and swap the buffers
         glfwSwapBuffers(window); //swaps color buffer used to render
         glfwPollEvents(); //checks if events are triggered and calls corresp fns
     }
