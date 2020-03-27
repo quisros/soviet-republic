@@ -15,7 +15,7 @@ A) Vertex specification
 Vertices define boundaries of a primitive: shapes like triangles, Fs, etc.
 
 Vertex array objects: define what data each vertex has
-Vertx buffer objects: store the actual vertex data
+Vertex buffer objects: store the actual vertex data
 
 Vertex data: series of attributes, need not be position. 
 Once it is specified, primitive is rendered by drawing command.
@@ -52,14 +52,14 @@ E) Rasterization
 
 Input: primitives generated in prev stage
 Output: sequence of fragments 
-Fragment: set of state used to compute final data for pixel
+Fragment: set of states used to compute final data for pixel
 
 F) Fragment processing
 
 Done by fragment shader.
 Output: list of colors for each color buffer being written to, 
 and a depth value + stencil value 
-(no shader then these two get their default value)
+(these take default value if not defined)
 
 G) Per-sample operations
 
