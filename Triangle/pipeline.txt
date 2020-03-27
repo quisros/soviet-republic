@@ -17,17 +17,22 @@ Vertices define boundaries of a primitive: shapes like triangles, Fs, etc.
 Vertex array objects: define what data each vertex has
 Vertx buffer objects: store the actual vertex data
 
-Vertex data: series of attributes, need not be position. Once it is specified, primitive is rendered by drawing command.
+Vertex data: series of attributes, need not be position. 
+Once it is specified, primitive is rendered by drawing command.
 
 B) Vertex processing
 
 Shader operation: a certain stage/kind of vertex processing. 
 
-Vertex shader: one-one mapping of input vertex to output vertex. Performs basic processing on each vertex via user-defined program.
+Vertex shader: one-one mapping of input vertex to output vertex. 
+Performs basic processing on each vertex via user-defined program.
 
-Tessellation: subdividing a patch of vertex data into smaller primitives, and computing vertex data for the new vertices generated. Ensures continuity across patches. (optional)
+Tessellation: subdividing a patch of vertex data into smaller primitives, 
+and computing vertex data for the new vertices generated. 
+Ensures continuity across patches. (optional)
 
-Geometry shader: takes single primitve input, outputs zero or more primitives. E.g. points to triangle, line to points. (optional)
+Geometry shader: takes single primitve input, outputs zero or more primitives. 
+E.g. points to triangle, line to points. (optional)
 
 C) Vertex post-processing
 
