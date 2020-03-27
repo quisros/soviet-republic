@@ -1,0 +1,59 @@
+OpenGL only processes 3D coordinates when they lie b/w -1.0 and 1.0. 
+This is called a normalized device coordinates range.
+Coordinates outside this range are clipped/discarded.
+
+NDC coordinates transformed to screen space coordinates via viewport transform using data provided with glViewport().
+These are then transformed to fragments as inputs to the fragment shader.
+
+OpenGL allows binding of multiple buffers as long as they all have different buffer types.
+
+glBufferData function:
+- specifically copies user defined data into the currently bound buffer
+- has four parameters
+- first: buffer type we want to copy data into
+- second: size of data to be passed
+- third: actual data to be copied
+- fourth: defines how data should be managed
+
+Possible values the fourth parameter can take:
+- GL_STREAM_DRAW: data is set only once, used by the GPU only a few times
+- GL_STATIC_DRAW: data is set only once, used many times
+- GL_DYNAMIC_DRAW: data is changed a lot, used many times
+
+Vectors
+- in GLSL, have a maximum size of 4
+- fourth component not used as a position in space
+- but rather for perspective division
+
+glShaderSource function:
+- attaches shader source code to the shader object
+- four arguments
+- first: shader object to compile
+- second: how many strings being passed as source code
+- third: actual source code
+- fourth: NULL for now
+
+Colors in computer graphics
+- array of four values
+- red, green, blue and alpha (opacity) or RGBA
+
+Shader program
+- final linked version of multiple shader compbined
+- initially compiled shaders must be linked to an object of this type
+- then this shader program will be activated when rendering objects
+- it's shaders will be used when we issue render calls
+- outputs of each intial shader are linked to inputs of next one
+
+glVertexAttribPointer fn:
+- specifies how OpenGL should interpret vertex data before rendering
+- has six parameters
+- first: specifies which vertix attribute is to be configured
+- second: size of vertex attribute
+- third: type of data
+- fourth: whether we want data to be normalized
+- fifth: stride, tells us space b/w consecutive VAs
+- sixth: offset of where posn data begins in the buffer; is of type void*
+
+Each vertex attribute takes its data from memory managed by a VBO, 
+and which VBO it takes its data from is determined by 
+the VBO currently bound to GL_ARRAY_BUFFER when calling glVertexAttribPointer.
