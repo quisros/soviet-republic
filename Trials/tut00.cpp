@@ -25,7 +25,7 @@ int main (int argc, char** argv) {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    //above 4 lines can be commented out if not using OS X
+    //third line can be commented out if not using OS X
     
     GLFWwindow* window = glfwCreateWindow(640, 480, "OpenGL Initialization Example", NULL, NULL);
     // window width, height, name, 4th parameter - don't want fullscreen
