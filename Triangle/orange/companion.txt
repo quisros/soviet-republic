@@ -57,3 +57,9 @@ glVertexAttribPointer fn:
 Each vertex attribute takes its data from memory managed by a VBO, 
 and which VBO it takes its data from is determined by 
 the VBO currently bound to GL_ARRAY_BUFFER when calling glVertexAttribPointer.
+
+glDrawArrays fn:
+- three arguments
+- first: OpenGL primitive type to be drawn
+- second: starting index of vertex array to be drawn
+- third: how many vertices we want to draw.
