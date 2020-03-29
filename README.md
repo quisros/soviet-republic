@@ -1,2 +1,2 @@
-# Soviet-Republic
-SoC Project: Plant/Atmosphere Renderer using OpenGL
+# Soviet Republic
+SoC Project: Planet/Atmosphere Renderer using OpenGL
