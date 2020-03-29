@@ -50,3 +50,38 @@ so we can link it with the vertex data.
 
 
 Fragment shader: requires a vec4 color output variable.
+
+
+Uniforms
+- global: unique per shader program object
+- can be accessed from any shader at any stage in the shader program
+- once set, keep their values until reset or updated
+
+NOTE: in the main function, the shader must be activated 
+before any calls to glUniform are made.
+
+
+glGetUniformLocation fn:
+- queries for the location of a uniform
+- two arguments
+- first: name/id of shader program object
+- second: name of the uniform (in double quotes)
+- if fn returns -1, could not find the location
+
+NOTE: finding the uniform location does not require you to use the shader program first, 
+but updating a uniform does require you to first use the program (by calling glUseProgram), 
+because it sets the uniform on the currently active shader program.
+
+
+glUniform fn:
+The function requires a specific postfix for the type of the uniform you want to set. 
+A few of the possible postfixes are:
+
+f: the function expects a float as its value.
+i: the function expects an int as its value.
+ui: the function expects an unsigned int as its value.
+3f: the function expects 3 floats as its value.
+fv: the function expects a float vector/array as its value.
+
+Whenever you want to configure an option of OpenGL, pick the overloaded function that corresponds with your type. 
+To set 4 floats of the uniform individually, we pass our data via glUniform4f.
