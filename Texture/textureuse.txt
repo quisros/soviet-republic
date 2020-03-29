@@ -1,3 +1,37 @@
-Loading textures
+Loading and generating textures
 
 stb_image.h: image loading library that supports several image formats
+
+glGenTextures fn:
+- two arguments
+- first: no. of textures to generate
+- second: unsigned int array which stores them
+
+glTexImage2D fn:
+
+- generates textures using previously loaded image data
+- nine arguments
+
+- first: texture target (GL_TEXTURE_1D/2D/3D)
+- second: mipmap level for which we want to create a texture (base level 0)
+- third: format in which texture is to be stored
+
+- fourth and fifth: width and height of resulting texture
+- sixth: always 0 (tron legacy)
+- seventh and eigth: format and datatype of source image
+- ninth: actual image data
+
+
+
+Passing texture object to fragment shader:
+
+GLSL has a built-in data-type for texture objects called a sampler 
+that takes as a postfix the texture type we want (sampler1D/2D/3D). 
+We can then add a texture to the fragment shader by simply declaring 
+a uniform sampler2D that we later assign our texture to.
+
+GLSL's built-in texture fn:
+- first arg: texture sampler
+- second arg: corresponding texture coords
+- samples corresponding color values using earlier set texture parameters
+- outputs the (filtered) color of the texture at the (interpolated) texture coord
