@@ -1,5 +1,4 @@
 //
-//  wire.cpp
 //  glinat0
 //
 //  Created by Shabnam Sahay on 28/03/20.
@@ -243,8 +242,8 @@ int main () {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     
     //set texture filtering parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     
     //load image, create texture and generate mipmaps
     int width, height, nrChannels;
@@ -276,8 +275,8 @@ int main () {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     
     //set texture filtering parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     
     //load image, create texture and generate mipmaps
     data = stbi_load("textures/haha.png", &width, &height, &nrChannels, 0);
@@ -323,7 +322,6 @@ int main () {
         glUniform1f(coeffColorLocation, coeff);
         
         //tell OpenGL for each sampler to which texture unit it belongs to
-        
         
         glUniform1i(glGetUniformLocation(shaderProgram, "texture1"), 0);
         glUniform1i(glGetUniformLocation(shaderProgram, "texture2"), 1);
