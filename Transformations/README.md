@@ -35,3 +35,5 @@ glUniformMatrix4fv fn
 - second arg: how many matrices being sent
 - third arg: do we want to transpose matrix
 - fourth arg: actual matrix data, converted from GLM's usual format to meet OpenGL's expectations
+
+The actual transformation order should be read in reverse: even though in code we may first translate and then later rotate, the actual transformations will first apply a rotation and then a translation. 
