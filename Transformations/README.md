@@ -21,3 +21,17 @@ and recreate normal 2D rotation matrix in the remaining main 3x3 section of the 
 Since matrix multiplication is not commutative, it is advised to first 
 do scaling, then rotation and lastly translation when combining (though obviously depends), 
 otherwise the transformations could negatively affect each other.
+
+###In practice
+A mat4 declared but not initialized is the null matrix.
+
+Common first argument to given three functions is trans.
+- glm::translate: second arg: 3D vector to be translated by
+- glm::rotate: second arg: rotation angle in rad, third arg: 3D unit vector giving rotation axis
+- glm::scale: second arg: 3 diagonal elements of scaling matrix
+
+glUniformMatrix4fv fn
+- first arg: uniform's location
+- second arg: how many matrices being sent
+- third arg: do we want to transpose matrix
+- fourth arg: actual matrix data, converted from GLM's usual format to meet OpenGL's expectations
