@@ -25,7 +25,7 @@ otherwise the transformations could negatively affect each other.
 ### In practice
 A mat4 declared but not initialized is the null matrix.
 
-Common first argument to given three functions is trans.
+Common first argument to given three functions is name of matrix.
 - glm::translate: second arg: 3D vector to be translated by
 - glm::rotate: second arg: rotation angle in rad, third arg: 3D unit vector giving rotation axis
 - glm::scale: second arg: 3 diagonal elements of scaling matrix
