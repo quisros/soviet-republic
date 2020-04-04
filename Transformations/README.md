@@ -22,7 +22,7 @@ Since matrix multiplication is not commutative, it is advised to first
 do scaling, then rotation and lastly translation when combining (though obviously depends), 
 otherwise the transformations could negatively affect each other.
 
-###In practice
+### In practice
 A mat4 declared but not initialized is the null matrix.
 
 Common first argument to given three functions is trans.
