@@ -1,0 +1,62 @@
+Loading and generating textures
+
+stb_image.h: image loading library that supports several image formats
+
+glGenTextures fn:
+- two arguments
+- first: no. of textures to generate
+- second: unsigned int array which stores them
+
+glTexImage2D fn:
+
+- generates textures using previously loaded image data
+- nine arguments
+
+- first: texture target (GL_TEXTURE_1D/2D/3D)
+- second: mipmap level for which we want to create a texture (base level 0)
+- third: format in which texture is to be stored
+
+- fourth and fifth: width and height of resulting texture
+- sixth: always 0 (tron legacy)
+- seventh: format of srcimg (RGB for jpg, RGBA for png as png contains alpha channel too)
+- eigth: datatype of source image (char so GL_UNSIGNED_BYTE usually)
+- ninth: actual image data
+
+
+
+Passing texture object to fragment shader:
+
+GLSL has a built-in data-type for texture objects called a sampler 
+that takes as a postfix the texture type we want (sampler1D/2D/3D). 
+We can then add a texture to the fragment shader by simply declaring 
+a uniform sampler2D that we later assign our texture to.
+
+GLSL's built-in texture fn:
+- first arg: texture sampler
+- second arg: corresponding texture coords
+- samples corresponding color values using earlier set texture parameters
+- outputs the (filtered) color of the texture at the (interpolated) texture coord
+
+
+
+Texture units
+
+- location of a texture
+- allows use of multiple textures in shaders
+- as long as corresponding texture unit is activated first
+- GL_TEXTURE0 is always be default activated
+
+OpenGL should have a at least a minimum of 16 texture units for use. 
+They are defined in order so we could also get GL_TEXTURE8 via GL_TEXTURE0 + 8, 
+which is useful when we'd have to loop over several texture units.
+
+
+GLSL's built-in mix fn:
+- takes two texture fn values as input
+- linearly interpolates b/w them based on third argument
+
+
+When initially inserted, texture images are flipped upside down.
+This is as OpenGL expects the 0.0 y coord at the bottom of the image, 
+but images usually have 0.0 at the top of the y axis.
+To rectify this, before loading any textures, use stbi_set_flip_vertically_on_load(true);.

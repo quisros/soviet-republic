@@ -1,0 +1,23 @@
+Parallel projection
+
+1. Orthographic projection
+- multiviews with true size/shape for parallel lines
+- for projection on z=0 plane, projection matrix is 4x4 identity with 3rd diagonal element as 0
+
+2. Axonometric projection
+- U is 3x3 identity matrix plus a full row of 1s added at bottom
+- T is the transformation matrix to bring object into required posn (i.e. axonometric projection)
+- then T*U gives matrix which is used to calc foreshortening ratios for each principal axis
+- trimetric, dimetric and isometric depending on how many unique foreshortening ratios
+
+3. Oblique projection
+- projectors mutually parallel but not perpendicular to plane of projection
+- orthogonally project given point onto projection plane
+- and join given point with projection plane via the projection line
+
+4. Perspective projection
+- projectors converge at finite centre of projection
+- non-uniform foreshortening
+- shape not preserved, but view is natural
+- vanishing point lies equal distance on opposite side of projection plane as center of projection
+- depending on which axis COP is on, required coeff is put in corresp. posn in 4th row of matrix

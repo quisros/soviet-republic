@@ -1,0 +1,94 @@
+To map a texture to a shape, each vertex of the shape needs to have a texture coordinate associated with it. 
+This coordinate specifies which part of the texture that vertex corresponds to.
+
+Texture coordinates range from (0,0) at the lower left corner of the texture image
+to (1,1) at the upper right corner of the texture image.
+
+
+Texture wrapping:
+when we specify coordinates outside the above range.
+
+1. GL_REPEAT: default behaviour; repeats the image
+
+2. GL_MIRRORED_REPEAT: same as previous but mirrors image with each repeat
+
+3. GL_CLAMP_TO_EDGE: clamps coordinates between 0 and 1. 
+This results in a stretched edge pattern as higher coordinates get clamped to the edge.
+
+4. GL_CLAMP_TO_BORDER: coordinates outside range are given a user-specified border color.
+
+
+Coordinate axes: x, y (and z for 3D textures) become s, t (and r for 3D textures). 
+Type of texture wrapping must be separately specified for each axis.
+
+
+glTexParameter* fn: three arguments; vary depending on type of texture wrapping being used.
+
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+
+float borderColor[] = { 1.0f, 1.0f, 0.0f, 1.0f };
+glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+
+
+
+Texture filtering
+
+Necessary as texture coordinates do not depend on resolution,
+but can be any floating point value, so we need to figure out
+which texture pixel to map the texture coordinate to.
+
+GL_NEAREST: default method. 
+The texel whose center is closest to the texture coordinate is chosen.
+The result is a blocked pattern: pixels can clearly be seen.
+Also called nearest neighbour or point filtering.
+
+GL_LINEAR:
+Takes an interpolated value from the texture coordinate's neighbouring texels.
+Resulting sampled color is kind of a linear combination, 
+where the coefficients depend on the centre-to-centre distance.
+The result is a smoother/more realistic pattern.
+Also called (bi)linear filtering.
+
+Magnifying (scaling upwards) and minifying (scaling downwards) operations need their filtering method specified.
+For example:
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+
+
+Mipmaps
+
+A concept used to solve the problem of high resolution textures being used for 'distant' objects.
+
+In such cases, since the distant object has fewer fragments,
+each fragment will span a larger part of the texture,
+so it becomes more difficult to select the exact color for that fragment.
+Memory bandwidth is also wasted in these cases.
+
+Mipmaps: a collection of texture images where each subsequent texture image
+is twice as small compared to the previous one.
+After a certain distance threshold from the viewer, 
+OpenGL will use a different mipmaptexture that best suits the distance to the object.
+The smaller resolution is not noticeable as the object is far away anyway.
+
+Sharp edges can be generated when switching between mipmap levels.
+Filtering can be used to solve this too. Method options:
+
+- GL_NEAREST_MIPMAP_NEAREST: takes the nearest mipmap to match the pixel size 
+and uses nearest neighbor interpolation for texture sampling.
+
+- GL_LINEAR_MIPMAP_NEAREST: takes the nearest mipmap level 
+and samples that level using linear interpolation.
+
+- GL_NEAREST_MIPMAP_LINEAR: linearly interpolates between the two mipmaps that most closely match the size of a pixel 
+and samples the interpolated level via nearest neighbor interpolation.
+
+- GL_LINEAR_MIPMAP_LINEAR: linearly interpolates between the two closest mipmaps 
+and samples the interpolated level via linear interpolation.
+
+Since mipmaps are primarily used for when textures get downscaled only,
+this is normally how the filtering methods can then be set:
+
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
