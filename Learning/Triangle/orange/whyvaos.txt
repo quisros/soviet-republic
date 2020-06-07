@@ -1,0 +1,56 @@
+//0. copy our vertices array in a buffer for OpenGL to use
+glBindBuffer(GL_ARRAY_BUFFER, VBO);
+glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+//1. set the vertex attributes pointers
+glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), (void*)0);
+glEnableVertexAttribArray(0);
+
+//2. use our shader program when we want to render an object
+glUseProgram(shaderProgram);
+
+//3. now draw the object
+someOpenGLFunctionThatDrawsThings();
+
+
+
+Instead of repeating this whole process every time we want to draw an object,
+we can store all these state configurations into an object 
+and simply bind this object to restore its state.
+
+A VAO is bound just like a VBO, and any subsequent VA calls
+from that point on will be stored in it. So when configuring
+VA pointers, those calls only have to be made once, and 
+whenever we want to draw the object, we can just bind the
+corresponding VAO. All the above state is store in it.
+
+
+
+//:: Initialization code (done once (unless your object frequently changes)) ::
+
+// 1. bind Vertex Array Object
+glBindVertexArray(VAO);
+
+// 2. copy our vertices array in a buffer for OpenGL to use
+glBindBuffer(GL_ARRAY_BUFFER, VBO);
+glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+// 3. then set our vertex attributes pointers
+glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+glEnableVertexAttribArray(0);  
+
+  
+[...]
+
+// ..:: Drawing code (in render loop) :: ..
+
+// 4. draw the object
+glUseProgram(shaderProgram);
+glBindVertexArray(VAO);
+someOpenGLFunctionThatDrawsOurTriangle(); 
+
+
+When multiple objects are to be drawn, first all the VAOs (and thus required
+VBOs and attribute pointers) are generated and stored for later use. When we
+want to draw one of the objects, we take the corresponding VAO, bind it, 
+then draw the object and unbind the VAO again.

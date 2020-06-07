@@ -1,0 +1,27 @@
+When drawing a rectangle, which can be made from two triangles,
+there will be overlap on the vertices specified - 
+6 will be specified but the no. of unique vertices is 4.
+
+A solution to this is to store only the unique vertices and then
+specify the order at which we want to draw these vertices in.
+
+EBO: buffer that stores indices, which is used by OpenGL to decide 
+which vertices to draw. This is so-called indexed drawing.
+
+glDrawElements fn:
+- draws using indices provided in currently bound EBO
+- four arguments
+- first: mode we want to draw in
+- second: total number of elements to be drawn (including overlaps)
+- third: type of indices
+- fourth: offset in the EBO
+
+We have to bind the corresponding EBO each time we want to render
+an object with indices. However, a VAO also keeps track of EBO bindings.
+The last EBO that gets bound while a VAO is bound, is stored as
+the VAO's EBO. Binding to a VAO then automatically binds the EBO.
+
+glPolygonMode fn:
+- allows wireframe mode drawing
+- first arg: says we want to apply to front and back of all objects
+- second arg: draw as lines or fill in
